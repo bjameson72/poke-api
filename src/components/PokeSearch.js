@@ -5,7 +5,10 @@ export default class PokeSearch extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      searchText: "",
+      listPoke: []
+    };
   }
 
   handleSearchInput = event => {
@@ -16,7 +19,9 @@ export default class PokeSearch extends React.Component {
     event.preventDefault();
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${this.state.searchText}`)
-      .then(res => console.log(res));
+      .then(response => {
+        this.setState({ listPoke: response.data });
+      });
   };
 
   render() {
@@ -31,9 +36,10 @@ export default class PokeSearch extends React.Component {
               value={this.state.searchText}
               onChange={this.handleSearchInput}
             />
-            <button type="submit" onSubmit={this.handleSearchPokemon}>
+            <button type="submit" onClick={this.handleSearchPokemon}>
               Search
             </button>
+            <div>{this.state.listPoke.name}</div>
           </form>
         </nav>
       </div>

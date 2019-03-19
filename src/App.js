@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PokeSearch from "./components/PokeSearch";
 import "./App.css";
+import PokeCard from "../src/components/PokeCard";
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
       <div className="App">
         <h1>Pokemon!</h1>
         <PokeSearch />
+        <PokeCard />
       </div>
     );
   }
