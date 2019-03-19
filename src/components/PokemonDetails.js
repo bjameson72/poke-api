@@ -21,7 +21,6 @@ class PokemonDetails extends React.Component {
       .get('https://pokeapi.co/api/v2/pokemon/1/')
       .then(Response => {
         console.log(Response);
-        console.log(Response.data.moves);
         this.setState({
           name: Response.data.species.name,
           types: Response.data.types,
@@ -66,7 +65,11 @@ class PokemonDetails extends React.Component {
                   key={index}
                   className="moreInfo"
                   onClick={() => {
-                    this.setState({ toggle: index });
+                    if (this.state.toggle === index) {
+                      this.setState({ toggle: '' });
+                    } else {
+                      this.setState({ toggle: index });
+                    }
                   }}
                 >
                   {move.move.name}
