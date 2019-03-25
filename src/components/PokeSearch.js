@@ -10,7 +10,8 @@ export default class PokeSearch extends React.Component {
       searchText: "",
       listPoke: {},
       sprites: "",
-      types: []
+      types: [],
+      id: ""
     };
   }
 
@@ -27,7 +28,8 @@ export default class PokeSearch extends React.Component {
         this.setState({
           listPoke: response.data,
           sprites: response.data.sprites,
-          types: response.data.types
+          types: response.data.types,
+          id: response.data.id
         });
       });
   };
@@ -51,6 +53,7 @@ export default class PokeSearch extends React.Component {
               sprites={this.state.sprites}
               name={this.state.listPoke.name}
               types={this.state.types}
+              id={this.state.id}
             />
           </form>
         </nav>

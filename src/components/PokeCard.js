@@ -8,9 +8,19 @@ import {
   CardSubtitle,
   Button
 } from "reactstrap";
+import { NavLink } from "react-router-dom";
 
 export default class PokeCard extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      url: "/detail/",
+      id: this.props.id
+    };
+  }
   render() {
+    const id = this.state.url + this.props.id;
     return (
       <div>
         <Card>
@@ -22,7 +32,7 @@ export default class PokeCard extends React.Component {
                 return <li key={index}> {type.type.name} </li>;
               })}
             </CardSubtitle>
-            <Button>Button</Button>
+            {this.props.id ? <NavLink to={id}>See more details</NavLink> : ""}
           </CardBody>
         </Card>
       </div>

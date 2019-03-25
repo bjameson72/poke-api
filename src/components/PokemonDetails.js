@@ -1,27 +1,27 @@
-import React from 'react';
-import axios from 'axios';
-import '../css/PokemonDetails.css';
-import AttackDetails from './AttackDetails';
-import PokemonCreator from './PokemonCreator';
+import React from "react";
+import axios from "axios";
+import "../css/PokemonDetails.css";
+import AttackDetails from "./AttackDetails";
+import PokemonCreator from "./PokemonCreator";
 
 class PokemonDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      name: "",
       types: [],
-      picture: '',
+      picture: "",
       stats: [],
       moves: [],
-      toggle: '',
+      toggle: "",
       attacks: [],
-      attackUrl: '',
+      attackUrl: ""
     };
   }
 
   componentDidMount = () => {
     axios
-      .get('https://pokeapi.co/api/v2/pokemon/1/')
+      .get(`https://pokeapi.co/api/v2/pokemon/${this.props.match.params.id}`)
       .then(Response => {
         console.log(Response);
         this.setState({
@@ -29,18 +29,18 @@ class PokemonDetails extends React.Component {
           types: Response.data.types,
           picture: Response.data.sprites.front_default,
           stats: Response.data.stats,
-          moves: Response.data.moves,
+          moves: Response.data.moves
         });
       })
       .catch(error => console.log(error));
   };
 
   selectAttack = (attackName, attackType) => {
-    let attack = attackName + ' ' + attackType;
+    let attack = attackName + " " + attackType;
     let attacks = [...this.state.attacks];
     attacks.push(attack);
     this.setState({
-      attacks: attacks,
+      attacks: attacks
     });
   };
 
@@ -50,7 +50,7 @@ class PokemonDetails extends React.Component {
         <h1>Pokemon Details</h1>
         <p>Name : {this.state.name}</p>
         <ol>
-          {' '}
+          {" "}
           Types:
           {this.state.types.map((type, index) => {
             return <li key={index}>{type.type.name}</li>;
@@ -58,7 +58,7 @@ class PokemonDetails extends React.Component {
         </ol>
         <img src={this.state.picture} alt="pokemon-sprite" />
         <ul>
-          {' '}
+          {" "}
           Stats :
           {this.state.stats.map((stats, index) => {
             return (
@@ -70,7 +70,7 @@ class PokemonDetails extends React.Component {
         </ul>
         {
           <ol>
-            Moves : {''}
+            Moves : {""}
             {this.state.moves.map((move, index) => {
               return (
                 <li
@@ -78,7 +78,7 @@ class PokemonDetails extends React.Component {
                   className="moreInfo"
                   onClick={() => {
                     if (this.state.toggle === index) {
-                      this.setState({ toggle: '' });
+                      this.setState({ toggle: "" });
                     } else {
                       this.setState({ toggle: index });
                     }
@@ -91,7 +91,7 @@ class PokemonDetails extends React.Component {
                       selectAttack={this.selectAttack}
                     />
                   ) : (
-                    ''
+                    ""
                   )}
                 </li>
               );
