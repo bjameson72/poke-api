@@ -16,8 +16,6 @@ class AttackDetails extends React.Component {
     axios
       .get(this.props.attackUrl)
       .then(Response => {
-        console.log(Response.data);
-        console.log(Response.data.damage_class.name);
         this.setState({
           accuracy: Response.data.accuracy,
           damageClass: Response.data.damage_class.name,
@@ -26,6 +24,7 @@ class AttackDetails extends React.Component {
           target: Response.data.target.name,
           type: Response.data.type.name,
           summary: Response.data.effect_entries[0].effect,
+          name: Response.data.name,
         });
       })
       .catch(error => console.log(error));
@@ -41,6 +40,13 @@ class AttackDetails extends React.Component {
         <p>Target : {this.state.target}</p>
         <p>Type : {this.state.type}</p>
         <p>Summary : {this.state.summary}</p>
+        <button
+          onClick={() =>
+            this.props.selectAttack(this.state.name, this.state.type)
+          }
+        >
+          Select attack
+        </button>
       </div>
     );
   }
