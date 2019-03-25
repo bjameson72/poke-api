@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import './App.css';
 import PokemonDetails from './components/PokemonDetails';
 import PokemonTeam from './components/PokemonTeam';
+import PokeSearch from "./components/PokeSearch";
 
 class App extends Component {
   render() {
