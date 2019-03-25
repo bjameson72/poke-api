@@ -1,15 +1,23 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+import './App.css';
+import PokemonDetails from './components/PokemonDetails';
+import PokemonTeam from './components/PokemonTeam';
 import PokeSearch from "./components/PokeSearch";
-import "./App.css";
 import PokeCard from "../src/components/PokeCard";
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <h1>Pokemon!</h1>
-        <PokeSearch />
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Switch>
+            <Route path="/" exact component={PokemonDetails} />
+            <Route path="/team" exact component={PokemonTeam} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }

@@ -1,0 +1,10 @@
+body {
+  text-align: center;
+}
+.moreInfo {
+  color: blue;
+}
+.moreInfo:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
