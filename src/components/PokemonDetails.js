@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import '../css/PokemonDetails.css';
 import AttackDetails from './AttackDetails';
+import PokemonCreator from './PokemonCreator';
 
 class PokemonDetails extends React.Component {
   constructor(props) {
@@ -13,6 +14,8 @@ class PokemonDetails extends React.Component {
       stats: [],
       moves: [],
       toggle: '',
+      attacks: [],
+      attackUrl: '',
     };
   }
 
@@ -30,6 +33,15 @@ class PokemonDetails extends React.Component {
         });
       })
       .catch(error => console.log(error));
+  };
+
+  selectAttack = (attackName, attackType) => {
+    let attack = attackName + ' ' + attackType;
+    let attacks = [...this.state.attacks];
+    attacks.push(attack);
+    this.setState({
+      attacks: attacks,
+    });
   };
 
   render() {
@@ -74,7 +86,10 @@ class PokemonDetails extends React.Component {
                 >
                   {move.move.name}
                   {this.state.toggle === index ? (
-                    <AttackDetails attackUrl={move.move.url} />
+                    <AttackDetails
+                      attackUrl={move.move.url}
+                      selectAttack={this.selectAttack}
+                    />
                   ) : (
                     ''
                   )}
@@ -83,6 +98,11 @@ class PokemonDetails extends React.Component {
             })}
           </ol>
         }
+        <PokemonCreator
+          name={this.state.name}
+          types={this.state.types}
+          attacks={this.state.attacks}
+        />
       </div>
     );
   }
