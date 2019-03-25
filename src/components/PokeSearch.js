@@ -1,11 +1,17 @@
 import React from "react";
 import axios from "axios";
+import PokeCard from "./PokeCard";
 
 export default class PokeSearch extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      searchText: "",
+      listPoke: {},
+      sprites: "",
+      types: []
+    };
   }
 
   handleSearchInput = event => {
@@ -16,7 +22,14 @@ export default class PokeSearch extends React.Component {
     event.preventDefault();
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${this.state.searchText}`)
-      .then(res => console.log(res));
+      .then(response => {
+        console.log(response.data);
+        this.setState({
+          listPoke: response.data,
+          sprites: response.data.sprites,
+          types: response.data.types
+        });
+      });
   };
 
   render() {
@@ -31,9 +44,14 @@ export default class PokeSearch extends React.Component {
               value={this.state.searchText}
               onChange={this.handleSearchInput}
             />
-            <button type="submit" onSubmit={this.handleSearchPokemon}>
+            <button type="submit" onClick={this.handleSearchPokemon}>
               Search
             </button>
+            <PokeCard
+              sprites={this.state.sprites}
+              name={this.state.listPoke.name}
+              types={this.state.types}
+            />
           </form>
         </nav>
       </div>

@@ -4,6 +4,8 @@ import './App.css';
 import PokemonDetails from './components/PokemonDetails';
 import PokemonTeam from './components/PokemonTeam';
 import PokeSearch from "./components/PokeSearch";
+import PokeCard from "../src/components/PokeCard";
+
 
 class App extends Component {
   render() {
