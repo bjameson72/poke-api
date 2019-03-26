@@ -1,4 +1,5 @@
 import React from 'react';
+import base from '../base';
 import '../css/PokemonCreator.css';
 
 /*Accepts Props:
@@ -8,6 +9,35 @@ attacks = string array[]
 */
 
 class PokemonCreator extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: this.props.name,
+      types: this.props.types,
+      attacks: this.props.attacks,
+      team: [{}],
+    };
+  }
+
+  componentDidMount() {
+    this.ref = base.syncState('team', {
+      context: this,
+      state: 'team',
+    });
+  }
+
+  addNewPokemon = (name, types, attacks) => {
+    let pokemon = {
+      name,
+      types,
+      attacks,
+    };
+    let team = this.state.team;
+    team.push(pokemon);
+    this.setState({ team });
+  };
+
   render() {
     return (
       <div>
@@ -17,12 +47,38 @@ class PokemonCreator extends React.Component {
         })}
         <ol>
           <h2>Move set :</h2>
-          <li>Attack 1: {this.props.attacks[0]}</li>
-          <li>Attack 2: {this.props.attacks[1]}</li>
-          <li>Attack 3: {this.props.attacks[2]}</li>
-          <li>Attack 4: {this.props.attacks[3]}</li>
+          {this.props.attacks[0] ? (
+            <li>Attack 1: {this.props.attacks[0].name}</li>
+          ) : (
+            ''
+          )}
+          {this.props.attacks[1] ? (
+            <li>Attack 2: {this.props.attacks[1].name}</li>
+          ) : (
+            ''
+          )}
+          {this.props.attacks[2] ? (
+            <li>Attack 3: {this.props.attacks[2].name}</li>
+          ) : (
+            ''
+          )}
+          {this.props.attacks[3] ? (
+            <li>Attack 4: {this.props.attacks[3].name}</li>
+          ) : (
+            ''
+          )}
         </ol>
-        <button>Add Pokemon to my team!</button>
+        <button
+          onClick={() =>
+            this.addNewPokemon(
+              this.props.name,
+              this.props.types,
+              this.props.attacks,
+            )
+          }
+        >
+          Add Pokemon to my team!
+        </button>
       </div>
     );
   }
