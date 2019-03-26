@@ -16,7 +16,9 @@ export default class PokeCard extends React.Component {
 
     this.state = {
       url: "/detail/",
-      id: this.props.id
+      id: this.props.id,
+      attacks: this.props.attacks,
+      sprites: this.props.sprites
     };
   }
   render() {
@@ -32,6 +34,19 @@ export default class PokeCard extends React.Component {
                 return <li key={index}> {type.type.name} </li>;
               })}
             </CardSubtitle>
+            {/* <CardText>
+              <ol>
+                {this.props.attacks.map((attack, index) => {
+                  return (
+                    <li key={index}>
+                      {" "}
+                      {attack.name}
+                      {attack.type}{" "}
+                    </li>
+                  );
+                })}
+              </ol>
+            </CardText> */}
             {this.props.id ? <NavLink to={id}>See more details</NavLink> : ""}
           </CardBody>
         </Card>

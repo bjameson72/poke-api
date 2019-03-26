@@ -1,31 +1,31 @@
-import React from 'react';
-import axios from 'axios';
-import '../css/PokemonDetails.css';
-import AttackDetails from './AttackDetails';
-import PokemonCreator from './PokemonCreator';
-import base from '../base';
-import NavBar from './Nav';
+import React from "react";
+import axios from "axios";
+import "../css/PokemonDetails.css";
+import AttackDetails from "./AttackDetails";
+import PokemonCreator from "./PokemonCreator";
+import base from "../base";
+import NavBar from "./Nav";
 
 class PokemonDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      name: "",
       types: [],
-      picture: '',
+      picture: "",
       stats: [],
       moves: [],
-      toggle: '',
-      attacks: [{ name: 'Choose an attack above', type: '' }],
-      attackUrl: '',
-      team: {},
+      toggle: "",
+      attacks: [{ name: "Choose an attack above", type: "" }],
+      attackUrl: "",
+      team: [{}]
     };
   }
 
   componentDidMount = () => {
-    this.ref = base.syncState('team', {
+    this.ref = base.syncState("team", {
       context: this,
-      state: 'team',
+      state: "team"
     });
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${this.props.match.params.id}`)
@@ -36,7 +36,7 @@ class PokemonDetails extends React.Component {
           types: Response.data.types,
           picture: Response.data.sprites.front_default,
           stats: Response.data.stats,
-          moves: Response.data.moves,
+          moves: Response.data.moves
         });
       })
       .catch(error => console.log(error));
@@ -45,17 +45,17 @@ class PokemonDetails extends React.Component {
   selectAttack = (attackName, attackType) => {
     let attack = {
       name: attackName,
-      type: attackType,
+      type: attackType
     };
     let attacks = [...this.state.attacks];
-    if (attacks[0].type === '') {
+    if (attacks[0].type === "") {
       attacks[0].name = attackName;
       attacks[0].type = attackType;
     } else {
       attacks.push(attack);
     }
     this.setState({
-      attacks,
+      attacks
     });
   };
 
@@ -66,7 +66,7 @@ class PokemonDetails extends React.Component {
         <h1>Pokemon Details</h1>
         <p>Name : {this.state.name}</p>
         <ol>
-          {' '}
+          {" "}
           Types:
           {this.state.types.map((type, index) => {
             return <li key={index}>{type.type.name}</li>;
@@ -74,7 +74,7 @@ class PokemonDetails extends React.Component {
         </ol>
         <img src={this.state.picture} alt="pokemon-sprite" />
         <ul>
-          {' '}
+          {" "}
           Stats :
           {this.state.stats.map((stats, index) => {
             return (
@@ -86,7 +86,7 @@ class PokemonDetails extends React.Component {
         </ul>
         {
           <ol>
-            Moves : {''}
+            Moves : {""}
             {this.state.moves.map((move, index) => {
               return (
                 <li
@@ -94,7 +94,7 @@ class PokemonDetails extends React.Component {
                   className="moreInfo"
                   onClick={() => {
                     if (this.state.toggle === index) {
-                      this.setState({ toggle: '' });
+                      this.setState({ toggle: "" });
                     } else {
                       this.setState({ toggle: index });
                     }
@@ -107,7 +107,7 @@ class PokemonDetails extends React.Component {
                       selectAttack={this.selectAttack}
                     />
                   ) : (
-                    ''
+                    ""
                   )}
                 </li>
               );
