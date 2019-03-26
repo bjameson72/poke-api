@@ -4,6 +4,7 @@ import '../css/PokemonDetails.css';
 import AttackDetails from './AttackDetails';
 import PokemonCreator from './PokemonCreator';
 import base from '../base';
+import NavBar from './Nav';
 
 class PokemonDetails extends React.Component {
   constructor(props) {
@@ -61,6 +62,7 @@ class PokemonDetails extends React.Component {
   render() {
     return (
       <div>
+        <NavBar />
         <h1>Pokemon Details</h1>
         <p>Name : {this.state.name}</p>
         <ol>

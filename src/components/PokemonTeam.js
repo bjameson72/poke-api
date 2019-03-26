@@ -1,6 +1,7 @@
 import React from 'react';
 import base from '../base';
 import PokeCard from './PokeCard';
+import NavBar from './Nav';
 
 class PokemonTeam extends React.Component {
   constructor(props) {
@@ -20,8 +21,8 @@ class PokemonTeam extends React.Component {
   render() {
     return (
       <div>
-        <h1>Your Pokemon Team</h1>
-        <PokeCard />
+        <NavBar />
+        <h1>My Pokemon Team</h1>
       </div>
     );
   }
