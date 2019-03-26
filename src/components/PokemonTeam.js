@@ -1,10 +1,12 @@
-import React from 'react';
+import React from "react";
+import NavBar from "./Nav";
 
 class PokemonTeam extends React.Component {
   render() {
     return (
       <div>
-        <h1>Your Pokemon Team</h1>
+        <NavBar />
+        <h1>My Pokemon Team</h1>
       </div>
     );
   }

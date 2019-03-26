@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import PokeCard from "./PokeCard";
+import PokemonTeam from "./PokemonTeam";
+import NavBar from "./Nav";
 
 export default class PokeSearch extends React.Component {
   constructor(props) {
@@ -37,7 +39,9 @@ export default class PokeSearch extends React.Component {
   render() {
     return (
       <div className="poke-search">
+        <NavBar />
         <nav>
+          <h1>Search for a Pokemon!</h1>
           <form>
             <input
               type="text"

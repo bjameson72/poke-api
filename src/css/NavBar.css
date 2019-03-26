@@ -1,0 +1,39 @@
+.NavList {
+  list-style: none;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  margin-bottom: 0;
+  margin-top: 3rem;
+}
+
+nav {
+  width: 100%;
+  padding-right: 3rem;
+}
+
+header {
+  display: flex;
+  background-color: red;
+  align-items: baseline;
+}
+
+ul li {
+  margin-right: 1.5rem;
+  background-color: white;
+  padding: 0.5rem 0.5rem;
+  border-radius: 10px 10px 0 0;
+}
+
+ul li a {
+  color: black;
+}
+
+img {
+  width: 10rem;
+  height: auto;
+}
+
+.active {
+  color: red;
+}
